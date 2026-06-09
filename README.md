@@ -107,6 +107,7 @@ http://localhost:7860
 
 ---
 
+
 ## The Three Prompt Versions
 
 | Version | Focus | Key Improvement |
@@ -268,20 +269,55 @@ A pre-built spreadsheet template for tracking experiments.
 ## Troubleshooting
 
 ### "OPENAI_API_KEY not found"
-Set your API key before running:
+Set your OpenAI key before running:
 ```powershell
-$env:OPENAI_API_KEY="sk-..."
+$env:OPENAI_API_KEY="sk-your-openai-key-here"
 uv run python main.py
 ```
 
-### "Port 7860 already in use"
-Change the port in main.py:
-```python
-demo.launch(server_port=7861)
+### "GEMINI_API_KEY not found"
+Set your Gemini key before running:
+```powershell
+$env:GEMINI_API_KEY="your-gemini-key-here"
+uv run python main.py
 ```
 
+### Check that Gemini SDK is installed
+After running `uv sync`, verify:
+```powershell
+uv run python -c "from google import genai; print('Gemini SDK import OK')"
+```
+
+### OpenAI SSL / certificate revocation problem
+If OpenAI fails with:
+```text
+CRYPT_E_NO_REVOCATION_CHECK
+```
+
+or the app shows an OpenAI connection/certificate problem, this usually means the local network, proxy, filter, firewall, or Windows certificate revocation checking is interfering with the HTTPS connection.
+
+Diagnostic command:
+```powershell
+curl.exe -i https://api.openai.com/v1/models -H "Authorization: Bearer $env:OPENAI_API_KEY"
+```
+
+If this fails with `CRYPT_E_NO_REVOCATION_CHECK`, you can test only for diagnosis:
+```powershell
+curl.exe --ssl-no-revoke -i https://api.openai.com/v1/models -H "Authorization: Bearer $env:OPENAI_API_KEY"
+```
+
+If the second command returns `HTTP/1.1 200 OK`, the API key is valid and the issue is local SSL/certificate checking or filtering.
+
+Important:
+- Do **not** disable SSL verification in the Python app.
+- Do **not** commit API keys to GitHub.
+- Try Gemini as the fallback provider if OpenAI is blocked.
+
+### "Port 7860 already in use"
+The app automatically tries port 7861 if 7860 is busy.
+
 ### "Prompts not loading"
-Verify `prompts/prompt1.md`, `prompt2.md`, `prompt3.md` exist
+Verify `prompts/prompt1.md`, `prompt2.md`, `prompt3.md` exist.
 
 ### "uv command not found"
 Install from: https://docs.astral.sh/uv/
@@ -327,4 +363,14 @@ After completing this project, you'll understand:
 **Python Version:** 3.10+  
 **Main Dependencies:** openai, gradio  
 **Last Updated:** 2026-06-09
+
+
+---
+
+## Author
+
+Created by **Yehudit Pollak**
+
+* GitHub: [y556780305](https://github.com/yt314)
+* Email: [y556780305@gmail.com](mailto:y556780305@gmail.com)
 
