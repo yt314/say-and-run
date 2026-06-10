@@ -306,6 +306,47 @@ custom_css = """
     font-weight: 700 !important;
     color: #ff6b35 !important;
 }
+
+#footer {
+    margin: 36px auto 12px auto;
+    padding: 14px 22px;
+    width: fit-content;
+    max-width: 95%;
+    text-align: center;
+    background: #ffffff;
+    border: 1px solid #fed7aa;
+    border-radius: 999px;
+    box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+    color: #1f2937;
+    font-size: 16px;
+    font-weight: 500;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+#footer strong {
+    font-weight: 900;
+    color: #111827;
+}
+
+#footer a {
+    color: #ea580c !important;
+    font-weight: 900;
+    text-decoration: none !important;
+}
+
+#footer a:hover {
+    color: #c2410c !important;
+    text-decoration: underline !important;
+}
+
+.footer-separator {
+    color: #fb923c;
+    font-weight: 900;
+}
 """
 
 # Create Gradio interface
@@ -408,6 +449,17 @@ with gr.Blocks(title="CLI Command Generator", css=custom_css) as demo:
             """
         )
 
+    gr.Markdown(
+            """
+            <div id="footer">
+                <span>Created by <strong>Yehudit Pollock</strong></span>
+                <span class="footer-separator">•</span>
+                <a href="https://github.com/yt314" target="_blank">GitHub</a>
+                <span class="footer-separator">•</span>
+                <a href="mailto:y556780305@gmail.com">y556780305@gmail.com</a>
+            </div>
+            """
+        )
 
 
 if __name__ == "__main__":

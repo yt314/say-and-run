@@ -107,6 +107,33 @@ http://localhost:7860
 
 ---
 
+## Screenshots
+
+### Generate Command
+
+The main screen allows the user to enter a natural-language instruction, choose an API provider, choose a prompt version, and generate a CLI command.
+
+![Generate Command](docs/screenshots/generate-command.png)
+
+### Generated CLI Command Output
+
+The generated CLI command is displayed clearly as the main output of the application, while the full model response is shown below for evaluation and debugging.
+
+![Generated CLI Command](screenshots/generated-cli-command.png)
+
+### Compare Prompt Versions
+
+The comparison screen allows testing the same instruction across all three prompt versions in order to evaluate improvements between iterations.
+
+![Compare Versions](screenshots/compare-versions.png)
+
+### View Prompts
+
+The prompt viewer makes it easy to inspect each prompt version and understand how the prompt evolved across the project.
+
+![View Prompts](screenshots/view-prompts.png)
+
+---
 
 ## The Three Prompt Versions
 
